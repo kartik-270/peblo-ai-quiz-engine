@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peblo AI | Premium Quiz Experience</title>
+    <meta name="description" content="AI-powered adaptive quiz engine for personalized learning.">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="bg-pulse"></div>
+    
+    <nav class="navbar glass">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="gradient-text">Peblo</span> AI
+            </a>
+            <div class="nav-links">
+                <a href="#quizzes" class="nav-item">Quizzes</a>
+                <a href="#stats" class="nav-item">Stats</a>
+                <button class="btn btn-primary btn-sm" onclick="showIngest()">
+                    <i class="fas fa-plus"></i> Ingest Content
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section text-center">
+            <h1 class="hero-title">Master Any Subject with <span class="gradient-text">Adaptive AI</span></h1>
+            <p class="hero-subtitle">Personalized quizzes generated directly from your study materials. Fast, smart, and interactive.</p>
+            <div class="hero-actions">
+                <a href="#quizzes" class="btn btn-primary btn-lg">Start Learning</a>
+                <a href="/docs" target="_blank" class="btn btn-outline btn-lg">API Specs</a>
+            </div>
+        </section>
+
+        <!-- Quiz Selector Section -->
+        <section id="quizzes" class="section">
+            <div class="section-header">
+                <h2>Browse <span class="gradient-text">Subjects</span></h2>
+                <p>Select a topic to test your knowledge.</p>
+            </div>
+            
+            <div class="subjects-grid" id="subjects-container">
+                <!-- Subject cards will be injected here -->
+                <div class="loader"></div>
+            </div>
+        </section>
+
+        <!-- Quiz Interface (Initially Hidden) -->
+        <section id="quiz-player" class="section hidden">
+            <div class="quiz-container glass">
+                <div class="quiz-header">
+                    <h3 id="current-quiz-title">Subject Quiz</h3>
+                    <div class="quiz-progress-bar">
+                        <div class="progress-fill" id="progress-bar"></div>
+                    </div>
+                    <div class="quiz-meta">
+                        <span id="question-counter">Question 1 of 5</span>
+                        <span id="quiz-timer"><i class="far fa-clock"></i> 00:00</span>
+                    </div>
+                </div>
+
+                <div id="question-box" class="question-box">
+                    <h2 id="q-text" class="q-text">Loading question...</h2>
+                    <div id="q-options" class="options-grid">
+                        <!-- Options injected here -->
+                    </div>
+                </div>
+
+                <div class="quiz-footer">
+                    <button class="btn btn-outline" id="btn-back" onclick="exitQuiz()">Exit</button>
+                    <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>Next Question <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Interface (Initially Hidden) -->
+        <section id="results-screen" class="section hidden text-center">
+            <div class="results-card glass">
+                <div class="result-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2>Quiz <span class="gradient-text">Complete!</span></h2>
+                <div class="score-display">
+                    <span id="final-score">0</span><span class="total">/10</span>
+                </div>
+                <p id="result-message">Great job! Keep learning to improve your score.</p>
+                <div class="results-actions">
+                    <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+                    <button class="btn btn-outline" onclick="exitQuiz()">Back to Subjects</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Ingest Modal -->
+    <div id="ingest-modal" class="modal hidden">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3>Ingest <span class="gradient-text">New Content</span></h3>
+                <button class="close-btn" onclick="hideIngest()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Upload a PDF to generate new questions.</p>
+                <form id="ingest-form">
+                    <div class="drop-zone" id="drop-zone">
+                        <i class="fas fa-file-pdf"></i>
+                        <p>Drag & Drop or Click to Upload</p>
+                        <input type="file" id="file-input" accept=".pdf" class="hidden">
+                    </div>
+                    <div id="file-info" class="file-info hidden">
+                        <span id="filename">file.pdf</span>
+                        <button type="button" class="remove-file" onclick="clearFile()"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" id="btn-upload">Process Content</button>
+                </form>
+                <div id="upload-status" class="mt-2 text-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2026 Peblo AI. Powered by <span class="gradient-text">Gemini & Llama</span>.</p>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
