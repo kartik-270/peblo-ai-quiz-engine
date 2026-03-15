@@ -154,6 +154,21 @@ function showQuestion() {
     }
 }
 
+function selectOption(btn, value) {
+    // Remove selected class from all options
+    const options = document.querySelectorAll('.option-btn');
+    options.forEach(opt => opt.classList.remove('selected'));
+
+    // Add selected class to the clicked button
+    btn.classList.add('selected');
+
+    // Update global state
+    selectedOption = value;
+
+    // Enable the next button
+    document.getElementById('btn-next').disabled = false;
+}
+
 async function nextQuestion() {
     const q = currentQuizzes[currentQuestionIndex];
     if (!q || !selectedOption) return;

@@ -10,5 +10,5 @@ pymupdf
 sentence-transformers
 python-multipart
 google-generativeai
-anthropic
+# anthropic
 requests
